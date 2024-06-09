@@ -12,7 +12,7 @@ export const settingChartData = (setChartData, prices1, prices2) => {
           fill: false,
           backgroundColor: "rgba(58, 128, 233,0.1)",
           tension: 0.25,
-          borderColor: "#3a80e9",
+          borderColor: "#3a80e9", // Crypto 1 line color
           pointRadius: 0,
           yAxisID: "crypto1",
         },
@@ -22,7 +22,7 @@ export const settingChartData = (setChartData, prices1, prices2) => {
           borderWidth: 1,
           fill: false,
           tension: 0.25,
-          borderColor: "#61c96f",
+          borderColor: "#61c96f", // Crypto 2 line color
           pointRadius: 0,
           yAxisID: "crypto2",
         },
@@ -38,7 +38,7 @@ export const settingChartData = (setChartData, prices1, prices2) => {
           fill: true,
           backgroundColor: "rgba(58, 128, 233,0.1)",
           tension: 0.25,
-          borderColor: "#3a80e9",
+          borderColor: "#3a80e9", // Crypto 1 line color
           pointRadius: 0,
           yAxisID: "crypto1",
         },

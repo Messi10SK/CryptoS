@@ -22,7 +22,7 @@ function Watchlist() {
   };
 
   return (
-    <div>
+    <div className="bg-blue">
       <Header />
       {watchlist?.length > 0 ? (
         <TabsComponent coins={coins} />

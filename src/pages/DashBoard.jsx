@@ -43,14 +43,6 @@ function Dashboard() {
     console.log(e.target.value);
   };
 
-  // var filteredCoins = coins.filter((coin) => {
-  //   if (
-  //     coin.name.toLowerCase().includes(search.trim().toLowerCase()) ||
-  //     coin.symbol.toLowerCase().includes(search.trim().toLowerCase())
-  //   ) {
-  //     return coin;
-  //   }
-  // });
 
   var filteredCoins = coins.filter(
     (coin) =>
@@ -60,18 +52,19 @@ function Dashboard() {
 
   const handlePageChange = (event, value) => {
     setPage(value);
-    // Value = new page number
     var initialCount = (value - 1) * 10;
     setPaginatedCoins(coins.slice(initialCount, initialCount + 10));
   };
 
   return (
     <>
-      <Header />
+    <div className="bg-blue">
+    <Header />
       {loading ? (
         <Loader />
       ) : (
         <>
+        <br />
           <Search search={search} handleChange={handleChange} />
           <Tabs
             coins={search ? filteredCoins : paginatedCoins}
@@ -87,6 +80,8 @@ function Dashboard() {
       )}
       <TopButton />
       <Footer />
+    </div>
+      
     </>
   );
 }

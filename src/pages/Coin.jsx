@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import Info from "../components/Info";
 import LineChart from "../components/LineChart";
 import SelectDays from "../components/SelectDays";
-
-
 import Header from "../components/Header";
 import Loader from "../components/Loader";
 import CoinGrid from "../components/CoinGrid";
@@ -67,11 +65,12 @@ function Coin() {
     <>
       <Header />
       {!error && !loading && coin.id ? (
-        <>
-          <div className="grey-wrapper">
-            <CoinGrid coin={coin} delay={0.5} />
-          </div>
-          <div className="grey-wrapper">
+        <div className="container mx-auto px-4">
+         <div className="bg-blue rounded-lg shadow-md mb-6 p-6 flex justify-center">
+  <CoinGrid coin={coin} delay={0.5} />
+</div>
+
+          <div className="bg-gray-200 rounded-lg shadow-md mb-6 p-6">
             <SelectDays handleDaysChange={handleDaysChange} days={days} />
             <ToggleComponents
               priceType={priceType}
@@ -79,22 +78,18 @@ function Coin() {
             />
             <LineChart chartData={chartData} />
           </div>
-          <Info title={coin.name} desc={coin.desc} />
-        </>
+          <div className="bg-gray-800 rounded-lg shadow-md p-6">
+            <Info title={coin.name} desc={coin.desc} />
+          </div>
+        </div>
       ) : error ? (
-        <div>
-          <h1 style={{ textAlign: "center" }}>
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">
             Sorry, Couldn't find the coin you're looking for 😞
           </h1>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              margin: "2rem",
-            }}
-          >
-            <a href="/dashboard">
-            <button>DashBoard</button>
+          <div className="flex justify-center">
+            <a href="/dashboard" className="btn btn-blue">
+              Dashboard
             </a>
           </div>
         </div>

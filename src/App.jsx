@@ -6,6 +6,8 @@ import DashBoard from './pages/DashBoard'
 import Coin from './pages/Coin'
 import Watchlist from './pages/Watchlist'
 import Compare from './pages/Compare'
+import News from   './pages/News'
+
 function App() {
 
 
@@ -19,6 +21,8 @@ function App() {
           <Route path="/coin/:id" element={<Coin />} />
           <Route path="/watchlist" element={<Watchlist />} />
           <Route path="/compare" element={<Compare />} />
+          <Route path="/news" element={<News />} />
+
     </Routes>
 </BrowserRouter>
    

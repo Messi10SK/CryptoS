@@ -4,22 +4,22 @@ import React from "react";
 function SelectDays({ days, handleDaysChange, noPTag }) {
   return (
     <div className={`flex items-center ${!noPTag ? 'mb-6' : ''} gap-2`}>
-      {!noPTag && <p>Price change in </p>}
+      {!noPTag && <p className="text-white">Price change in</p>}
       <Select
         value={days}
         onChange={(e) => handleDaysChange(e)}
         sx={{
           height: "2.5rem",
-          color: "var(--white)",
+          color: "white",
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--white)",
+            borderColor: "white",
           },
           "& .MuiSvgIcon-root": {
-            color: "var(--white)",
+            color: "white",
           },
           "&:hover": {
             "&& fieldset": {
-              borderColor: "#3a80e9",
+              borderColor: "white",
             },
           },
         }}
@@ -36,3 +36,4 @@ function SelectDays({ days, handleDaysChange, noPTag }) {
 }
 
 export default SelectDays;
+

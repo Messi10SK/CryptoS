@@ -1,37 +1,13 @@
 import React from "react";
-import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import CoinGrid from "./CoinGrid"; // Adjust the path as needed
- // Assuming you still have some custom styles
 
 export default function Tabs({ coins, setSearch }) {
-  const [value, setValue] = React.useState("grid");
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const style = {
-    color: "var(--white)",
-    "& .Mui-selected": {
-      color: "var(--blue) !important",
-    },
-    fontFamily: "Inter,sans-serif",
-    fontWeight: 600,
-    textTransform: "capitalize",
-  };
-
   return (
-    <TabContext value={value}>
-      <div className="border-b border-divider">
-        <TabList onChange={handleChange} variant="fullWidth">
-          <Tab label="Grid" value="grid" sx={style} />
-        </TabList>
-      </div>
+    <TabContext value="grid">
       <TabPanel value="grid">
-        <div className="grid-flex flex justify-center items-start flex-wrap w-full gap-4">
+        <div className="grid-flex flex justify-center items-start flex-wrap w-full bg-blue gap-4">
           {coins.length > 0 ? (
             coins.map((coin, i) => (
               <CoinGrid coin={coin} key={i} delay={(i % 4) * 0.2} />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Info({ title, desc }) {
-  const shortDesc = `${desc.slice(0, 300)}<br/><p class='text-gray-500 cursor-pointer'>Read More...</p>`;
+  const shortDesc = `${desc.slice(0, 300)}<br/><p class='text- cursor-pointer'>Read More...</p>`;
   const longDesc = `${desc}<br/><p class='text-gray-500 cursor-pointer'>Read Less...</p>`;
 
   const [toggle, setToggle] = useState(false);
