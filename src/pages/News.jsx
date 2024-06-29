@@ -4,11 +4,11 @@ import Footer from "../components/Footer";
 
 const News = () => {
   const [mynews, setMyNews] = useState([]);
-
+  const title = import.meta.env.VITE_APP_API;
   const fetchData = async () => {
     try {
       let response = await fetch(
-        "https://newsapi.org/v2/top-headlines?country=us&apiKey=714ef9b8a6ef47d19b4bda6f4f0d100f"
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${title}`
       );
       let data = await response.json();
       setMyNews(data.articles);
