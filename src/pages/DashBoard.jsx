@@ -2,24 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Loader from  "../components/Loader"
+import Loader from "../components/Loader";
 import Search from "../components/Search";
 import Tabs from "../components/Tabs";
 import PaginationControlled from "../components/PaginationControlled";
-import TopButton from "../components/TopButton";
 
 
 function Dashboard() {
+
+
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [paginatedCoins, setPaginatedCoins] = useState([]);
 
-  useEffect(() => {
-    // Get 100 Coins
-    getData();
-  }, []);
+
 
   const getData = () => {
     setLoading(true);
@@ -28,15 +26,21 @@ function Dashboard() {
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
       )
       .then((response) => {
-        console.log("RESPONSE>>>", response.data);
+        console.log("response", response.data);
         setCoins(response.data);
         setPaginatedCoins(response.data.slice(0, 10));
         setLoading(false);
       })
       .catch((error) => {
-        console.log("ERROR>>>", error.message);
+        console.log("error", error.message);
       });
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -50,7 +54,7 @@ function Dashboard() {
       coin.symbol.toLowerCase().includes(search.trim().toLowerCase())
   );
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = (value) => {
     setPage(value);
     var initialCount = (value - 1) * 10;
     setPaginatedCoins(coins.slice(initialCount, initialCount + 10));
@@ -58,13 +62,15 @@ function Dashboard() {
 
   return (
     <>
-    <div className="bg-blue">
-    <Header />
+      <Header />
+      <div className="bg-blue">
+
+
       {loading ? (
         <Loader />
       ) : (
         <>
-        <br />
+        <br/>
           <Search search={search} handleChange={handleChange} />
           <Tabs
             coins={search ? filteredCoins : paginatedCoins}
@@ -78,12 +84,18 @@ function Dashboard() {
           )}
         </>
       )}
-      <TopButton />
+            </div>
       <Footer />
-    </div>
-      
     </>
   );
 }
 
 export default Dashboard;
+
+
+
+
+
+
+
+

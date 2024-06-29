@@ -32,8 +32,8 @@ function SelectCoins({
         >
           {allCoins
             .filter((coin) => coin.id !== crypto2)
-            .map((coin) => (
-              <MenuItem value={coin.id} key={coin.id}>
+            .map((coin,i) => (
+              <MenuItem value={coin.id} key={i}>
                 {coin.name}
               </MenuItem>
             ))}
@@ -59,8 +59,8 @@ function SelectCoins({
         >
           {allCoins
             .filter((coin) => coin.id !== crypto1)
-            .map((coin) => (
-              <MenuItem value={coin.id} key={coin.id}>
+            .map((coin,i) => (
+              <MenuItem value={coin.id} key={i}>
                 {coin.name}
               </MenuItem>
             ))}
@@ -75,4 +75,3 @@ function SelectCoins({
 }
 
 export default SelectCoins;
-

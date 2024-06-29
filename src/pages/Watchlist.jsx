@@ -1,47 +1,38 @@
 import React, { useEffect, useState } from "react";
-
 import Header from "../components/Header";
-import TabsComponent from "../components/Tabs";
+import Tabs from "../components/Tabs";
 import { get100Coins } from "../utils/get100Coins";
 
 function Watchlist() {
-  const watchlist = JSON.parse(localStorage.getItem("watchlist"));
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
-    if (watchlist) {
-      getData();
+    async function fetchData() {
+      if (watchlist.length > 0) {
+        const allCoins = await get100Coins();
+        if (allCoins) {
+          const filteredCoins = allCoins.filter((coin) =>
+            watchlist.includes(coin.id)
+          );
+          setCoins(filteredCoins);
+        }
+      }
     }
-  }, []);
-
-  const getData = async () => {
-    const allCoins = await get100Coins();
-    if (allCoins) {
-      setCoins(allCoins.filter((coin) => watchlist.includes(coin.id)));
-    }
-  };
+    fetchData();
+  }, [watchlist]);
 
   return (
     <div className="bg-blue">
       <Header />
-      {watchlist?.length > 0 ? (
-        <TabsComponent coins={coins} />
+      {watchlist.length > 0 ? (
+        <Tabs coins={coins} />
       ) : (
-        <div>
-          <h1 style={{ textAlign: "center" }}>
-            Sorry, No Items In The Watchlist.
-          </h1>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              margin: "2rem",
-            }}
-          >
-            <a href="/dashboard">
-             <Button>DashBoard</Button>
-            </a>
-          </div>
+        <div className="text-center ">
+          <h1> No Items In The Watchlist.</h1>
+          <a href="/dashboard" >
+            <Button>DashBoard</Button>
+          </a>
         </div>
       )}
     </div>

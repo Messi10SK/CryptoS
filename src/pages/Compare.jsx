@@ -106,21 +106,20 @@ function Compare() {
             handleDaysChange={handleDaysChange}
           />
           <div className="flex justify-center bg-blue p-6 rounded-lg shadow-md mb-6">
-            <CoinGrid coin={coin1Data} />
-            <CoinGrid coin={coin2Data} />
+            <CoinGrid key={coin1Data.id} coin={coin1Data} />
+            <CoinGrid key={coin2Data.id} coin={coin2Data} />
           </div>
-     
-          <div className=" bg-gray-200 p-6 rounded-lg shadow-md mb-6">
+          <div className="bg-gray-200 p-6 rounded-lg shadow-md mb-6">
             <ToggleComponents
               priceType={priceType}
               handlePriceTypeChange={handlePriceTypeChange}
             />
             <LineChart chartData={chartData} multiAxis={true} />
           </div>
-          <div className=" bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-md mb-6">
             <Info title={coin1Data.name} desc={coin1Data.desc} />
           </div>
-          <div className=" bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-md mb-6">
             <Info title={coin2Data.name} desc={coin2Data.desc} />
           </div>
         </div>

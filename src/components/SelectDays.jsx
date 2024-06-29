@@ -7,7 +7,7 @@ function SelectDays({ days, handleDaysChange, noPTag }) {
       {!noPTag && <p className="text-white">Price change in</p>}
       <Select
         value={days}
-        onChange={(e) => handleDaysChange(e)}
+        onChange={handleDaysChange}
         sx={{
           height: "2.5rem",
           color: "white",
@@ -36,4 +36,3 @@ function SelectDays({ days, handleDaysChange, noPTag }) {
 }
 
 export default SelectDays;
-

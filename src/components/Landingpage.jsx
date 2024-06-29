@@ -15,7 +15,7 @@ export default function LandingPage() {
           <RWebShare
             data={{
               text: "CryptoStare",
-              url: "https://crypto-dashboard-jan.netlify.app",
+              url: "",
               title: "CryptoStare",
             }}
             onClick={() => toast.info("App Shared!")}

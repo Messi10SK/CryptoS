@@ -6,11 +6,11 @@ import SelectDays from "../components/SelectDays";
 import Header from "../components/Header";
 import Loader from "../components/Loader";
 import CoinGrid from "../components/CoinGrid";
+import ToggleComponents from "../components/ToggleComponents";
 import { getCoinData } from "../utils/getCoinData";
 import { getPrices } from "../utils/getPrices";
 import { settingChartData } from "../utils/settingChartData";
 import { settingCoinObject } from "../utils/settingCoinObject";
-import ToggleComponents from "../components/ToggleComponents";
 
 function Coin() {
   const { id } = useParams();
@@ -29,46 +29,59 @@ function Coin() {
 
   const getData = async () => {
     setLoading(true);
-    let coinData = await getCoinData(id, setError);
-    console.log("Coin DATA>>>>", coinData);
-    settingCoinObject(coinData, setCoin);
-    if (coinData) {
-      const prices = await getPrices(id, days, priceType, setError);
-      if (prices) {
-        settingChartData(setChartData, prices);
-        setLoading(false);
+    try {
+      const coinData = await getCoinData(id, setError);
+      if (coinData) {
+        settingCoinObject(coinData, setCoin);
+        const prices = await getPrices(id, days, priceType, setError);
+        if (prices) {
+          settingChartData(setChartData, prices);
+        }
+      } else {
+        setError(true); // Handle case where coinData is not fetched properly
       }
+    } catch (error) {
+      setError(true); // Handle any other errors during data fetching
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDaysChange = async (event) => {
-    setLoading(true);
-    setDays(event.target.value);
-    const prices = await getPrices(id, event.target.value, priceType, setError);
-    if (prices) {
-      settingChartData(setChartData, prices);
-      setLoading(false);
-    }
+    const newDays = event.target.value;
+    setDays(newDays);
+    await fetchData(newDays, priceType);
   };
 
   const handlePriceTypeChange = async (event) => {
+    const newPriceType = event.target.value;
+    setPriceType(newPriceType);
+    await fetchData(days, newPriceType);
+  };
+
+  const fetchData = async (days, priceType) => {
     setLoading(true);
-    setPriceType(event.target.value);
-    const prices = await getPrices(id, days, event.target.value, setError);
-    if (prices) {
-      settingChartData(setChartData, prices);
+    try {
+      const prices = await getPrices(id, days, priceType, setError);
+      if (prices) {
+        settingChartData(setChartData, prices);
+      }
+    } catch (error) {
+      setError(true);
+    } finally {
       setLoading(false);
     }
   };
 
+  // Render conditionally based on loading and error states
   return (
     <>
       <Header />
       {!error && !loading && coin.id ? (
         <div className="container mx-auto px-4">
-         <div className="bg-blue rounded-lg shadow-md mb-6 p-6 flex justify-center">
-  <CoinGrid coin={coin} delay={0.5} />
-</div>
+          <div className="bg-blue rounded-lg shadow-md mb-6 p-6 flex justify-center">
+            <CoinGrid coin={coin} delay={0.5} />
+          </div>
 
           <div className="bg-gray-200 rounded-lg shadow-md mb-6 p-6">
             <SelectDays handleDaysChange={handleDaysChange} days={days} />
@@ -78,6 +91,7 @@ function Coin() {
             />
             <LineChart chartData={chartData} />
           </div>
+
           <div className="bg-gray-800 rounded-lg shadow-md p-6">
             <Info title={coin.name} desc={coin.desc} />
           </div>
@@ -85,7 +99,7 @@ function Coin() {
       ) : error ? (
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">
-            Sorry, Couldn't find the coin you're looking for 😞
+            Sorry, couldn't find the coin you're looking for 😞
           </h1>
           <div className="flex justify-center">
             <a href="/dashboard" className="btn btn-blue">
@@ -101,3 +115,12 @@ function Coin() {
 }
 
 export default Coin;
+
+
+
+
+
+
+
+
+
