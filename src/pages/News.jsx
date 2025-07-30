@@ -9,7 +9,7 @@ const News = () => {
   const fetchData = async () => {
     try {
       let response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${title}`
+        `https://newsapi.org/v2/everything?q=tesla&from=2025-06-30&sortBy=publishedAt&apiKey=${title}`
       );
 
       let data = await response.json();
