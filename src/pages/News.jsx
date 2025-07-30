@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 const News = () => {
   const [mynews, setMyNews] = useState([]);
-  const title = import.meta.env.VITE_APP_API;
+  const title = import.meta.env.VITE_APP_APIKEY;
   console.log(title)
   const fetchData = async () => {
     try {
